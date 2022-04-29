@@ -12,13 +12,25 @@ end
 
 m = loadModule('readZipFile');
 
-res = m.readlines(zipFile, txtFileName, uint64(nLines), uint64(offset));
+res = py.readZipFile.readlines(zipFile, txtFileName, uint64(nLines), uint64(offset));
 
-offset = double(res{2});
+try
+    lines = cellfun(@(x)char(uint8(x)),cell(res{1}),'UniformOutput',false);
+    offset = double(res{2});
+    fallback = false;
+catch
+    resChar = erase(char(res),regexpPattern({'^\(\[b''','\)$'}));
+    res = split(resChar,regexpPattern('''\], '));
+    lines = split(res{1},regexpPattern(''', b'''));
+    offset = str2double(res{2});
+    fallback = true;
+end
 
-lines = cellfun(@(x)char(uint8(x)),cell(res{1}),'UniformOutput',false);
 emptyLines = cellfun(@isempty,lines);
 lines(emptyLines) = {false};
-lines(~emptyLines) = regexprep(lines(~emptyLines),'\r?\n$',''); % keep newline & cr to 
+lines(~emptyLines) = regexprep(lines(~emptyLines),'\r?\n$','');
+if fallback
+    lines(~emptyLines) = regexprep(lines(~emptyLines),'(\\r)?\\n$','');
+end
 
 end

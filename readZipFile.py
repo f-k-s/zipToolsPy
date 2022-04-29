@@ -34,7 +34,8 @@ def readlines(inFile, txtFile, n=1, offset=0):
         with z.open(txtFile) as f:
             f.seek(offset)
             lns = [f.readline() for k in range(n)]
-    return lns, f.tell()
+            pos = f.tell()
+    return lns, pos
 
 
 
