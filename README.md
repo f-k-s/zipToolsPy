@@ -1,5 +1,5 @@
 # zipToolsPy
-provides basic tools to read content from zip files
+A Matlab interface for the zipfile python module to provide basic tools to read content from zip files.
 
 
 ===== THIS IS A BETA VERSION AND UNDER DEVELOPMENT ======

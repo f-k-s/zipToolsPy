@@ -2,12 +2,10 @@ function content = zip_getContent(zipFile)
 %
 
 
-infoLst = py.zipfile.ZipFile(zipFile).infolist();
-
-infoCell = cell(infoLst);
+infoCell = cell(py.zipfile.ZipFile(zipFile).infolist());
 
 
-file_names = cellfun(@(x)char(x.filename),infoCell,'UniformOutput',false);
+file_name = cellfun(@(x)char(x.filename),infoCell,'UniformOutput',false);
 
 file_size = cellfun(@(x)double(x.file_size),infoCell,'UniformOutput',false);
 
@@ -20,7 +18,7 @@ date_time = num2cell(datetime(dateTimeDBL)).';
 
 
 fieldnames = {'filenames' 'file_size' 'compress_size' 'date_time'};
-cntData = [file_names; file_size; compress_size; date_time];
+cntData = [file_name; file_size; compress_size; date_time];
 
 content = cell2struct(cntData, fieldnames, 1);
 
