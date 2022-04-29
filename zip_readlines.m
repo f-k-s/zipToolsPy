@@ -1,5 +1,7 @@
 function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset)
 %
+% Note for using offset: complexity for seeking is O(offset) because we
+% need to read and decompress the data up to the desired point.
 
 if ~exist('nLines','var') || isempty(nLines)
     nLines = 1;

@@ -17,7 +17,7 @@ dateTimeDBL = cellfun(@double,dateTimeTPL);
 date_time = num2cell(datetime(dateTimeDBL)).';
 
 
-fieldnames = {'filenames' 'file_size' 'compress_size' 'date_time'};
+fieldnames = {'file_name' 'file_size' 'compress_size' 'date_time'};
 cntData = [file_name; file_size; compress_size; date_time];
 
 content = cell2struct(cntData, fieldnames, 1);
