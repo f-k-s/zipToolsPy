@@ -10,7 +10,7 @@ if ~exist('offset','var') || isempty(offset)
     offset = 0;
 end
 
-m = loadModule('readZipFile');
+m = zip_init('readZipFile');
 
 res = py.readZipFile.readlines(zipFile, txtFileName, uint64(nLines), uint64(offset));
 

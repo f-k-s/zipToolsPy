@@ -1,7 +1,7 @@
 function content = zip_getContent(zipFile)
 %
 
-
+zip_init();
 infoList = py.zipfile.ZipFile(zipFile).infolist();
 
 
