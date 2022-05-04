@@ -13,12 +13,10 @@ if isempty(pe.Version)
 end
 try cell(py.list({'a'}));
 catch ME
-    if exist(ME,'var')
-        switch ME.identifier
-            case {'MATLAB:invalidConversion'}
-                % might by incompatible python version...
-            otherwise
-        end
+    switch ME.identifier
+        case {'MATLAB:invalidConversion'}
+            % might by incompatible python version...
+        otherwise
     end
     throwAsCaller(ME);
 end
