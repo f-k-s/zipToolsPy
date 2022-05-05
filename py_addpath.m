@@ -17,6 +17,7 @@
 %
 %VERSION DATE: 3 Novemeber 2017
 %AUTHOR: Eric Fields
+% << MODIFIED by Konrad Schumacher, May 2022 >>
 %
 %NOTE: This function is provided "as is" and any express or implied warranties 
 %are disclaimed.
@@ -59,13 +60,21 @@ end
 
 function current_py_path = get_py_path()
 %Function to return the current python search path as a cell array of strings
+% MODS by KS: some combinations of Matlab/Python versions let the
+% type-conversion to cell fail. Heres a rather dirty workaround by
+% converting to char instead:
     try
         current_py_path = cellfun(@char, cell(py.sys.path), 'UniformOutput', 0)';
-    catch
-        pp = regexprep(char(py.sys.path),'^\[|\]$','');
-        current_py_path = split(pp,regexpPattern(''', '''));
-        if ispc
-            current_py_path = strrep(current_py_path,'\\','\');
+    catch ME
+        switch ME.identifier
+            case {'MATLAB:invalidConversion'}
+                pp = regexprep(char(py.sys.path),'^\[|\]$','');
+                current_py_path = split(pp,regexpPattern(''', '''));
+                if ispc
+                    current_py_path = strrep(current_py_path,'\\','\');
+                end
+            otherwise
+                rethrow(ME);
         end
     end
 end
