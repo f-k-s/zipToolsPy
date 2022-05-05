@@ -10,22 +10,28 @@ A Matlab interface for the zipfile python module to provide basic tools to read 
 Reads lines in a zip-compressed text file.
 
 **Input**  
--  zipFile:        Name of the zip file.  
--  txtFileName:    Name of the compressed text file.  
--  nLines:         Number of lines to read.  
--  offset:         Position (in bytes) to start reading.
+-  *zipFile*  
+      Name of the zip file.  
+-  *txtFileName*  
+      Name of the compressed text file.  
+-  *nLines*  
+      Number of lines to read.  
+-  *offset*  
+      Position (in bytes) to start reading.
 
 **Output**  
--  lines:          Cellstring of lines read from `txtFile`. A cell is empty
-                  for  empty lines (containing only `\n` [and `\r`]) and
-                  contains `false` if there were lines requested beyond
-                  `EOF`. I.e. `numel(lines)` will allways be equal to `nLines`
-                  but if `nLines` exceed the number of lines in the text
-                  file the corresponding cells will contain `false`.  
--  offset:         Position (in bytes) where we stopped reading.
-                  `offset` can be reused as input to continue reading on
-                  the next line.  
-                  *Cave*: Complexity for seeking in zip files is O(offset).  
+-  *lines*  
+    Cellstring of lines read from `txtFile`. A cell is empty
+    for empty lines (containing only `\n` [and `\r`]) and
+    contains `false` if there were lines requested beyond
+    `EOF`. I.e. `numel(lines)` will allways be equal to `nLines`
+    but if `nLines` exceed the number of lines in the text
+    file the corresponding cells will contain `false`.  
+-  *offset*  
+    Position (in bytes) where we stopped reading.
+    `offset` can be reused as input to continue reading on
+    the next line.  
+    ***Cave***: Complexity for seeking in zip files is O(offset).  
 
 ## zip_getContent
 
@@ -33,15 +39,15 @@ Reads lines in a zip-compressed text file.
 Returns the content of a zip file.
 
 **Input**  
--  zipFile:  
+-  *zipFile*  
     Name of the zip file.
 
 **Output**  
--  content:  
+-  *content*  
     Structure array with fields
-                 - file_name
-                 - file_size
-                 - compress_size
-                 - date_time
+     - file_name
+     - file_size
+     - compress_size
+     - date_time
               containing information for each file in `zipFile`.
 
