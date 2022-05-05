@@ -33,10 +33,12 @@ Reads lines in a zip-compressed text file.
 Returns the content of a zip file.
 
 **Input**  
--  zipFile:    Name of the zip file.
+-  zipFile:  
+    Name of the zip file.
 
 **Output**  
--  content:    Structure array with fields
+-  content:  
+    Structure array with fields
                  - file_name
                  - file_size
                  - compress_size
