@@ -1,8 +1,29 @@
 # zipToolsPy
-A Matlab interface for the zipfile python module to provide basic tools to read content from zip files.
+A Matlab interface for the zipfile python module to provide basic tools to read content from zip files.  
+Descending into subdirectories within a zip file is currently not supported.
 
 
 # Functions
+
+
+## zip_getContent
+
+    content = zip_getContent(zipFile)  
+Returns the content of a zip file.
+
+**Input**  
+-  *zipFile*  
+    Name of the zip file.
+
+**Output**  
+-  *content*  
+    Structure array with fields
+     - file_name
+     - file_size
+     - compress_size
+     - date_time
+              containing information for each file in `zipFile`.
+
 
 ## zip_readlines
 
@@ -32,22 +53,3 @@ Reads lines in a zip-compressed text file.
     `offset` can be reused as input to continue reading on
     the next line.  
     ***Cave***: Complexity for seeking in zip files is O(offset).  
-
-## zip_getContent
-
-    content = zip_getContent(zipFile)  
-Returns the content of a zip file.
-
-**Input**  
--  *zipFile*  
-    Name of the zip file.
-
-**Output**  
--  *content*  
-    Structure array with fields
-     - file_name
-     - file_size
-     - compress_size
-     - date_time
-              containing information for each file in `zipFile`.
-
