@@ -1,4 +1,4 @@
-function m = zip_init(mName)
+function [m,pvers] = zip_init(mName)
 %
 
 % VERSION: 1.0, May 2022

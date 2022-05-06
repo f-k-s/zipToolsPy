@@ -43,12 +43,16 @@ def readlines(inFile, txtFile, n=1, offset=0):
     
     with zipfile.ZipFile(inFile) as z:
         with z.open(txtFile) as f:
-            f.seek(offset)
+            if offset>0:
+                f.seek(offset)
             if n<0:
                 lns = f.readlines()
             else:
                 lns = [f.readline() for k in range(n)]
-            pos = f.tell()
+            try:
+                pos = f.tell()
+            except:
+                pos = None
     return lns, pos
 
 

@@ -46,14 +46,27 @@ if ~exist('offset','var') || isempty(offset)
     offset = 0;
 end
 
-zip_init('readZipFile');
+validateattributes(zipFile,{'char','string'},{'scalartext'},mfilename,'zipFile',1);
+validateattributes(txtFileName,{'char','string'},{'scalartext'},mfilename,'txtFileName',2);
+validateattributes(nLines,'numeric',{'scalar','integer'},mfilename,'nLines',3);
+validateattributes(offset,'numeric',{'scalar','nonnegative','integer'},mfilename,'offset',4);
+[~,pvers] = zip_init('readZipFile');
+
+if offset>0  && str2double(pvers)<3.7
+    error('zipToolsPy:pythonVersionDoesNotSupportSeeking','This python version (%s) does not support seeking in compressed files.',pvers);
+end
+
 
 res = py.readZipFile.readlines(zipFile, txtFileName, int64(nLines), uint64(offset));
 
 
 try
     lines = cellfun(@(x)char(uint8(x)),cell(res{1}),'UniformOutput',false);
-    offset = double(res{2});
+    if isa(py.None,'py.NoneType')
+        offset = NaN;
+    else
+        offset = double(res{2});
+    end
     fallback = false;
 
 catch ME
