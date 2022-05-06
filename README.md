@@ -16,12 +16,14 @@ Returns the content of a zip file.
 
 **Output**  
 -  *content*  
-    Structure array with fields
+    Structure array containing information for each file in `zipFile`.  
+    Fields:
      - file_name
      - file_size
      - compress_size
-     - date_time
-              containing information for each file in `zipFile`.
+     - date_time    
+
+
 
 
 ## zip_readlines
