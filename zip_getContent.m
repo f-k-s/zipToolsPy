@@ -34,7 +34,7 @@ infoList = py.zipfile.ZipFile(zipFile).infolist();
 
     
 try
-    infoCell = cell(infoList(1));
+    infoCell = cell(infoList);
     file_name = cellfun(@(x)char(x.filename),infoCell,'UniformOutput',false);
 
     file_size = cellfun(@(x)double(x.file_size),infoCell,'UniformOutput',false);

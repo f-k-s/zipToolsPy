@@ -16,6 +16,7 @@
 """
 import zipfile
 
+# TODO: support encripted zip files
 def readlines(inFile, txtFile, n=1, offset=0):
     """
     Reads lines of a zip-compressed text file starting at a given offset
@@ -49,7 +50,6 @@ def readlines(inFile, txtFile, n=1, offset=0):
                 lns = [f.readline() for k in range(n)]
             pos = f.tell()
     return lns, pos
-
 
 
 def getFileList(inFile):
