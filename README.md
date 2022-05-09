@@ -47,10 +47,20 @@ Reads lines in a zip-compressed text file.
     for empty lines (containing only `\n` [and `\r`]) and
     contains `false` if there were lines requested beyond
     `EOF`. I.e. `numel(lines)` will allways be equal to `nLines`
-    but if `nLines` exceed the number of lines in the text
-    file the corresponding cells will contain `false`.  
+    but if `nLines` exceeds the number of lines in the text
+    file, the corresponding cells will contain `false`.  
 -  *offset*  
     Position (in bytes) where we stopped reading.
     `offset` can be reused as input to continue reading on
     the next line.  
-    ***Cave***: Complexity for seeking in zip files is O(offset).  
+    ***Cave***: Complexity for seeking in zip files is O(offset), i.e. reading line by line like this would be inefficient:  
+    
+        offset = 0;
+        lines = cell(100,1);
+        for li = 1:100
+            [lines(i), offset] = zip_readlines(zipFile, txtFileName, 1, offset);
+        end
+
+     On each interation all data unti `li` has to be decompressed. So instead do:
+     
+         lines = zip_readlines(zipFile, txtFileName, 100, offset);  
