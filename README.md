@@ -29,7 +29,7 @@ Returns the content of a zip file.
 ## zip_readlines
 
     [lines, offset] = zip_readlines(zipFile, txtFileName, nLines, offset)  
-Reads lines in a zip-compressed text file.
+Reads lines in a zip-compressed text file without unpacking the whole file.
 
 **Input**  
 -  *zipFile*  
