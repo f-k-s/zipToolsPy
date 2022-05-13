@@ -40,7 +40,7 @@ Reads lines in a zip-compressed text file without unpacking the whole file.
       Number of lines to read (optional, default: 1).  
 -  *offset*  
       Position (in bytes) to start reading (optional, default: 0).  
--  *password*
+-  *password*  
       Password for encrypted zip files (optional). Pass an empty string if zipFile is not encrypted.  
 
 **Output**  
