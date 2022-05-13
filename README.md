@@ -53,14 +53,15 @@ Reads lines in a zip-compressed text file without unpacking the whole file.
     Position (in bytes) where we stopped reading.
     `offset` can be reused as input to continue reading on
     the next line.  
-    ***Cave***: Complexity for seeking in zip files is O(offset), i.e. reading line by line like this would be inefficient:  
+    ***Cave***: Complexity for seeking in zip files is O(offset), i.e. reading line by line like this would be *inefficient*:  
     
-        offset = 0;
-        lines = cell(100,1);
-        for li = 1:100
-            [lines(i), offset] = zip_readlines(zipFile, txtFileName, 1, offset);
+        offset0 = 0; offset = offset0;
+        nLines = 100;
+        lines = cell(nLines,1);
+        for li = 1:nLines
+            [lines(li), offset] = zip_readlines(zipFile, txtFileName, 1, offset);
         end
 
      On each interation all data unti `li` has to be decompressed. So instead do:
      
-         lines = zip_readlines(zipFile, txtFileName, 100, offset);  
+         lines = zip_readlines(zipFile, txtFileName, nLines, offset0);  
