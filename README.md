@@ -37,9 +37,11 @@ Reads lines in a zip-compressed text file without unpacking the whole file.
 -  *txtFileName*  
       Name of the compressed text file.  
 -  *nLines*  
-      Number of lines to read.  
+      Number of lines to read (optional, default: 1).  
 -  *offset*  
-      Position (in bytes) to start reading.
+      Position (in bytes) to start reading (optional, default: 0).  
+-  *password*
+      Password for encrypted zip files (optional). Pass an empty string if zipFile is not encrypted.  
 
 **Output**  
 -  *lines*  
