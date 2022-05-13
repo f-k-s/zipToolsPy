@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-% VERSION: 1.0, May 2022
+% VERSION: 1.1, May 2022
 % AUTHOR: Konrad Schumacher
 %
 % NOTE: This function is provided "as is" and any express or implied warranties 
@@ -16,8 +16,7 @@
 """
 import zipfile
 
-# TODO: support encripted zip files
-def readlines(inFile, txtFile, n=1, offset=0):
+def readlines(inFile, txtFile, n=1, offset=0, pwd=r''):
     """
     Reads lines of a zip-compressed text file starting at a given offset
 
@@ -31,6 +30,8 @@ def readlines(inFile, txtFile, n=1, offset=0):
         Number of lines to be read. The default is 1. If n<0 everything until EOF will be read.
     offset : int, optional
         Offset where we start reading in bytes. The default is 0 = BOF.
+    pwd : string, optional
+        Password for encrypted zip files. The default is r'' (no password).
 
     Returns
     -------
@@ -42,7 +43,7 @@ def readlines(inFile, txtFile, n=1, offset=0):
     """
     
     with zipfile.ZipFile(inFile) as z:
-        with z.open(txtFile) as f:
+        with z.open(txtFile,pwd=pwd.encode()) as f:
             if offset>0:
                 f.seek(offset)
             if n<0:

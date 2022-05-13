@@ -1,4 +1,4 @@
-function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset)
+function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset,password)
 % Reads lines in a zip-compressed text file.
 % 
 %
@@ -6,38 +6,42 @@ function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset)
 %
 %   zipFile:        Name of the zip file.
 %   txtFileName:    Name of the compressed text file.
-%   nLines:         Number of lines to read.
-%   offset:         Position (in bytes) to start reading.
+%   nLines:         Number of lines to read (optional, default: 1).
+%   offset:         Position (in bytes) to start reading (optional,
+%                    default: 0). 
+%   password:       Password for encrypted zip files (optional). Pass an
+%                    empty string if zipFile is not encrypted.
 %
 %
 % OUTPUT:
 %
 %   lines:          Cellstring of lines read from txtFile. A cell is empty
-%                   for  empty lines (containing only \n [and \r]) and
-%                   contains false if there were lines requested beyond
-%                   EOF. I.e. numel(lines) will allways be equal to nLines
-%                   but if nLines exceed the number of lines in the text
-%                   file the corresponding cells will contain false.
+%                    for  empty lines (containing only \n [and \r]) and
+%                    contains false if there were lines requested beyond
+%                    EOF. I.e. numel(lines) will allways be equal to nLines
+%                    but if nLines exceed the number of lines in the text
+%                    file the corresponding cells will contain false.
 %
 %   offset:         Position (in bytes) where we stopped reading.
-%                   Offset can be reused as input to continue reading on
-%                   the next line. Cave: Complexity for seeking in zip
-%                   files is O(offset), see below.
+%                    Offset can be reused as input to continue reading on
+%                    the next line. Cave: Complexity for seeking in zip
+%                    files is O(offset), see below.
 % 
 % Note for using offset: complexity for seeking is O(offset) because we
-% need to read and decompress the data up to the desired point.
+%  need to read and decompress the data up to the desired point.
 %
 % See also: zip_getContent
 
-% VERSION: 1.0, May 2022
+% VERSION: 1.1, May 2022
 % AUTHOR: Konrad Schumacher
 %
-% NOTE: This function is provided "as is" and any express or implied warranties 
-% are disclaimed.
+% NOTE: This function is provided "as is" and any express or implied
+% warranties are disclaimed.
 
 % Copyright (c) 2022, Konrad Schumacher
 % All rights reserved.
-% This code is free and open source software made available under the GNU General Public License.
+% This code is free and open source software made available under the GNU
+% General Public License. 
 
 if ~exist('nLines','var') || isempty(nLines)
     nLines = 1;
@@ -45,11 +49,15 @@ end
 if ~exist('offset','var') || isempty(offset)
     offset = 0;
 end
+if ~exist('password','var') || isnan(password) || isempty(password)
+    password = '';
+end
 
 validateattributes(zipFile,{'char','string'},{'scalartext'},mfilename,'zipFile',1);
 validateattributes(txtFileName,{'char','string'},{'scalartext'},mfilename,'txtFileName',2);
 validateattributes(nLines,'numeric',{'scalar','integer'},mfilename,'nLines',3);
 validateattributes(offset,'numeric',{'scalar','nonnegative','integer'},mfilename,'offset',4);
+validateattributes(password,{'char','string'},{'scalartext'},mfilename,'password',5);
 [~,pvers] = zip_init('readZipFile');
 
 if offset>0  && str2double(pvers)<3.7
@@ -57,7 +65,7 @@ if offset>0  && str2double(pvers)<3.7
 end
 
 
-res = py.readZipFile.readlines(zipFile, txtFileName, int64(nLines), uint64(offset));
+res = py.readZipFile.readlines(zipFile, txtFileName, int64(nLines), uint64(offset), password);
 
 
 try
