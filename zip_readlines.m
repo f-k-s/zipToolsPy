@@ -49,7 +49,7 @@ end
 if ~exist('offset','var') || isempty(offset)
     offset = 0;
 end
-if ~exist('password','var') || isnan(password) || isempty(password)
+if ~exist('password','var') || isempty(password)
     password = '';
 end
 
