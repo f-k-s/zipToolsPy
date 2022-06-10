@@ -83,7 +83,7 @@ Extracts compressed files from a zip file.
 -  *extrctFiles*  
       Name(s) of the compressed file(s) that should be extracted. Specify '/all' (case insensitive) to extract all files.
 -  *outPath*  
-      Path to extract file(s) to. Non-existing directories will be created. Optional. 
+      Path to extract file(s) to. Non-existing directories will be created (optional). 
 -  *password*  
       Password for encrypted zip files (optional). Pass an empty string if zipFile is not encrypted.  
 
