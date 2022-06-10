@@ -30,7 +30,7 @@ function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset,passw
 % Note for using offset: complexity for seeking is O(offset) because we
 %  need to read and decompress the data up to the desired point.
 %
-% See also: zip_getContent
+% See also: zip_getContent, zip_extract
 
 % VERSION: 1.1, May 2022
 % AUTHOR: Konrad Schumacher
