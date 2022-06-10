@@ -55,8 +55,8 @@ end
 
 validateattributes(zipFile,{'char','string'},{'scalartext'},mfilename,'zipFile',1);
 validateattributes(txtFileName,{'char','string'},{'scalartext'},mfilename,'txtFileName',2);
-validateattributes(nLines,'numeric',{'scalar','integer'},mfilename,'nLines',3);
-validateattributes(offset,'numeric',{'scalar','nonnegative','integer'},mfilename,'offset',4);
+validateattributes(nLines,{'numeric'},{'scalar','integer'},mfilename,'nLines',3);
+validateattributes(offset,{'numeric'},{'scalar','nonnegative','integer'},mfilename,'offset',4);
 validateattributes(password,{'char','string'},{'scalartext'},mfilename,'password',5);
 [~,pvers] = zip_init('readZipFile');
 
