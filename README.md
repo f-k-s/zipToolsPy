@@ -2,8 +2,9 @@
 A Matlab interface for the zipfile python module to provide basic tools to read content from zip files.  
 
 
-# Functions
 
+
+# Functions
 
 ## zip_getContent
 
@@ -23,7 +24,7 @@ Returns the content of a zip file.
      - compress_size
      - date_time    
 
-
+____________________
 
 
 ## zip_readlines
@@ -68,7 +69,7 @@ Reads lines in a zip-compressed text file without unpacking the whole file.
      
          lines = zip_readlines(zipFile, txtFileName, nLines, offset0);  
 
-
+____________________
 
 
 ## zip_extract
