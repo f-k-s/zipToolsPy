@@ -67,3 +67,25 @@ Reads lines in a zip-compressed text file without unpacking the whole file.
      On each interation all data unti `li` has to be decompressed. So instead do:
      
          lines = zip_readlines(zipFile, txtFileName, nLines, offset0);  
+
+
+
+
+## zip_extract
+
+    extracted = zip_extract(zipFile, extrctFiles, outPath, password)  
+Extracts compressed files from a zip file.
+
+**Input**  
+-  *zipFile*  
+      Name of the zip file.
+-  *extrctFiles*  
+      Name(s) of the compressed file(s) that should be extracted. Specify '/all' (case insensitive) to extract all files.
+-  *outPath*  
+      Path to extract file(s) to. Non-existing directories will be created. Optional. 
+-  *password*  
+      Password for encrypted zip files (optional). Pass an empty string if zipFile is not encrypted.  
+
+**Output**  
+-  *extracted*  
+      Path of the extraced file(s). (Cellstring)
