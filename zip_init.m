@@ -15,11 +15,17 @@ if verLessThan('Matlab','8.4')
     error('zipToolsPy:tooOldMatlabVersion','It seems that this version of Matlab is tool old and does not provide an interface to python.');
 elseif verLessThan('Matlab','9.7')
     pvers = pyversion; %#ok
+    helpfun = 'pyversion';
 else
     pvers = pyenv().Version;
+    helpfun = 'pyenv';
 end
-if isempty(pvers)
-    error('zipToolsPy:noCPythonFound','Python interpreter was not found by Matlab.')
+if strlength(pvers)==0
+    error('zipToolsPy:noCPythonFound', ...
+        ['No Python interpreter configured.\n', ...
+         'Use <a href="matlab:doc(%s)">%s</a> to setup a python interpreter. ', ...
+          'This is persistent across Matlab sessions.'], ... 
+        helpfun, helpfun)
 end
 
 try cell(py.list({'a'}));
