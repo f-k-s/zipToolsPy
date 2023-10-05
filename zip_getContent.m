@@ -5,6 +5,7 @@ function content = zip_getContent(zipFile)
 % INPUT:
 %
 % zipFile:    Name of the zip file.
+%             <char, string>
 %
 %
 % OUTPUT:
@@ -15,6 +16,7 @@ function content = zip_getContent(zipFile)
 %                  - compress_size
 %                  - date_time
 %               containing information for each file in zipFile.
+%             <struct>
 %
 % See also: zip_readlines
 

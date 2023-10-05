@@ -1,5 +1,6 @@
 function [m,pvers] = zip_init(mName)
-%
+% [m,pvers] = zip_init(mName)
+% Adds path and imports module for python; for internal use only.
 
 % VERSION: 1.0, May 2022
 % AUTHOR: Konrad Schumacher

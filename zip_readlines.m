@@ -5,12 +5,17 @@ function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset,passw
 % INPUT:
 %
 %   zipFile:        Name of the zip file.
-%   txtFileName:    Name of the compressed text file.
-%   nLines:         Number of lines to read (optional, default: 1).
+%                   <char, string>
+%   txtFileName:    Name of the compressed text file. 
+%                   <char, string>
+%   nLines:         Number of lines to read (optional, default: 1). 
+%                   <numeric>
 %   offset:         Position (in bytes) to start reading (optional,
 %                    default: 0). 
+%                   <numeric>
 %   password:       Password for encrypted zip files (optional). Pass an
-%                    empty string if zipFile is not encrypted.
+%                    empty string if zipFile is not encrypted. 
+%                   <char, string>
 %
 %
 % OUTPUT:
@@ -21,11 +26,13 @@ function [lines, offset] = zip_readlines(zipFile,txtFileName,nLines,offset,passw
 %                    EOF. I.e. numel(lines) will allways be equal to nLines
 %                    but if nLines exceed the number of lines in the text
 %                    file the corresponding cells will contain false.
+%                   <cellstring>
 %
 %   offset:         Position (in bytes) where we stopped reading.
 %                    Offset can be reused as input to continue reading on
 %                    the next line. Cave: Complexity for seeking in zip
-%                    files is O(offset), see below.
+%                    files is O(offset), see below. 
+%                   <double>
 % 
 % Note for using offset: complexity for seeking is O(offset) because we
 %  need to read and decompress the data up to the desired point.

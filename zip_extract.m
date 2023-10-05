@@ -5,20 +5,24 @@ function extracted = zip_extract(zipFile,extrctFiles,outPath,password)
 % INPUT:
 %
 % zipFile:    Name of the zip file.
+%             <char, string>
 % 
 % extrctFiles: Name(s) of the compressed file(s) that should be extracted.
 %             Specify '/all' (case insensitive) to extract all files.
+%             <char, string, cellstring> 
 % 
 % outPath:    Path to extract file(s) to. Non-existing directories will be
 %             created. Optional. 
+%             <char, string>
 % 
 % password:   Password for encrypted zip files. Optional.
+%             <char, string>
 %
 %
 % OUTPUT:
 %
-% extracted: Path to the extraced file(s). (Cellstring)
-%
+% extracted: Path to the extraced file(s).
+%            <cellstring>
 %
 % See also: zip_readlines, zip_getContent
 
@@ -56,7 +60,7 @@ end
 passw = py.bytes(uint8(password));
 
 if any(strcmpi(extrctFiles,'/all'))
-    % TODO: extractall() does not return a list of extraced files. use
+    % TODO: extractall() does not return a list of extracted files. use
     % getContent() ... TEST THIS:
     py.zipfile.ZipFile(zipFile).extractall( ...
                             outPath, py.None, passw);
